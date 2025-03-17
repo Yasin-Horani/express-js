@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-let psosts = [
+let posts = [
   { id: 1, title: "First post" },
   { id: 2, title: "Second post" },
   { id: 3, title: "Third post" },
@@ -9,12 +9,14 @@ let psosts = [
 
 // get all posts
 app.get("/api/posts", (req, res) => {
-  res.json(psosts);
+  res.json(posts);
 });
 
 // get single posts
-app.get("/api/posts/:id", (req, res) => {
-  res.json(req.params);
+// filter the posts array and find the post with the id
+app.get("/api/post/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  res.json(posts.filter((post) => post.id === id));
 });
 
 //middleware : use static files
