@@ -12,6 +12,11 @@ app.get("/api/posts", (req, res) => {
   res.json(psosts);
 });
 
+// get single posts
+app.get("/api/posts/:id", (req, res) => {
+  res.json(req.params);
+});
+
 //middleware : use static files
 //app.use(express.static(path.join(__dirname, "public")));
 
