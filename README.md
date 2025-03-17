@@ -12,3 +12,5 @@ in terminal
     "start": "node server",
     "dev": "node --watch server"  
   },
+
+  -- to start the server => npm run dev
