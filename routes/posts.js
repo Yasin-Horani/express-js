@@ -3,6 +3,7 @@ import { getPosts } from "../controllers/postController.js";
 import { getPost } from "../controllers/postController.js";
 import { addPost } from "../controllers/postController.js";
 import { updatePost } from "../controllers/postController.js";
+import { deletePost } from "../controllers/postController.js";
 const router = express.Router();
 
 let posts = [
@@ -24,14 +25,5 @@ router.post("/", addPost);
 router.put("/:id", updatePost);
 
 // delete posts
-router.delete("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const post = posts.find((post) => post.id === id);
-  if (post) {
-    posts = posts.filter((post) => post.id !== id);
-    res.status(200).json(post);
-  } else {
-    return res.status(404).send("Post not found 404");
-  }
-});
+router.delete("/:id", deletePost);
 export default router;
