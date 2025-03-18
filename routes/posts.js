@@ -1,6 +1,7 @@
 import express from "express";
 import { getPosts } from "../controllers/postController.js";
 import { getPost } from "../controllers/postController.js";
+import { addPost } from "../controllers/postController.js";
 const router = express.Router();
 
 let posts = [
@@ -16,18 +17,7 @@ router.get("/", getPosts);
 router.get("/:id", getPost);
 
 // post posts
-router.post("/", (req, res) => {
-  const newPost = {
-    id: posts.length + 1,
-    title: req.body.title,
-  };
-  if (!newPost)
-    return res
-      .status(404)
-      .json({ message: `The Post ${req.body.title}  does not found` });
-  posts.push(newPost);
-  res.status(201).json(newPost);
-});
+router.post("/", addPost);
 
 // update posts
 router.put("/:id", (req, res) => {
