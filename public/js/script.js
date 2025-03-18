@@ -30,4 +30,5 @@ async function addPost(e) {
     },
     body: JSON.stringify({ title }),
   });
+  getPosts()
 }
