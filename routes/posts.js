@@ -1,9 +1,12 @@
 import express from "express";
-import { getPosts } from "../controllers/postController.js";
-import { getPost } from "../controllers/postController.js";
-import { addPost } from "../controllers/postController.js";
-import { updatePost } from "../controllers/postController.js";
-import { deletePost } from "../controllers/postController.js";
+import {
+  getPosts,
+  getPost,
+  addPost,
+  updatePost,
+  deletePost,
+} from "../controllers/postController.js";
+
 const router = express.Router();
 
 let posts = [
