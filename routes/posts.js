@@ -1,4 +1,6 @@
 import express from "express";
+import { getPosts } from "../controllers/postController.js";
+import { getPost } from "../controllers/postController.js";
 const router = express.Router();
 
 let posts = [
@@ -8,21 +10,10 @@ let posts = [
 ];
 
 // get all posts
-router.get("/", (req, res) => {
-  res.json(posts);
-});
+router.get("/", getPosts);
 
 // get single posts
-router.get("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const post = posts.find((post) => post.id === id);
-  if (post) {
-    return res.status(200).json(post);
-  } else {
-    return res.status(404).send("Post not found 404");
-  }
-  res.json(posts.filter((post) => post.id === id));
-});
+router.get("/:id", getPost);
 
 // post posts
 router.post("/", (req, res) => {
@@ -52,13 +43,13 @@ router.put("/:id", (req, res) => {
 
 // delete posts
 router.delete("/:id", (req, res) => {
-    const id = parseInt(req.params.id);
-    const post = posts.find((post) => post.id === id);
-    if (post) {
-      posts = posts.filter((post) => post.id !== id);
-      res.status(200).json(post);
-    } else {
-      return res.status(404).send("Post not found 404");
-    }
-  });
+  const id = parseInt(req.params.id);
+  const post = posts.find((post) => post.id === id);
+  if (post) {
+    posts = posts.filter((post) => post.id !== id);
+    res.status(200).json(post);
+  } else {
+    return res.status(404).send("Post not found 404");
+  }
+});
 export default router;
