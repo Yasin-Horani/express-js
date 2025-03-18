@@ -13,7 +13,6 @@ router.get("/", (req, res) => {
 });
 
 // get single posts
-
 router.get("/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const post = posts.find((post) => post.id === id);
@@ -23,6 +22,20 @@ router.get("/:id", (req, res) => {
     return res.status(404).send("Post not found 404");
   }
   res.json(posts.filter((post) => post.id === id));
+});
+
+// post posts
+router.post("/", (req, res) => {
+  const newPost = {
+    id: posts.length + 1,
+    title: req.body.title,
+  };
+  if (!newPost)
+    return res
+      .status(404)
+      .json({ message: `The Post ${req.body.title}  does not found` });
+  posts.push(newPost);
+  res.status(201).json(newPost);
 });
 
 export default router;
