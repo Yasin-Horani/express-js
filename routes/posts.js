@@ -50,4 +50,15 @@ router.put("/:id", (req, res) => {
   }
 });
 
+// delete posts
+router.delete("/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const post = posts.find((post) => post.id === id);
+    if (post) {
+      posts = posts.filter((post) => post.id !== id);
+      res.status(200).json(post);
+    } else {
+      return res.status(404).send("Post not found 404");
+    }
+  });
 export default router;
